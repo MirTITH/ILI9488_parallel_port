@@ -12,7 +12,7 @@ void StartDefaultTask(void const *argument)
     lv_init();
     lv_port_disp_init();
     
-    lv_demo_music();
+    lv_demo_benchmark();
 
     uint32_t PreviousWakeTime = osKernelSysTick();
     for (;;) {
