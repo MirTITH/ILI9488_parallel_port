@@ -12,7 +12,7 @@
  */
 
 /* clang-format off */
-#if 0 /*Set it to "1" to enable content*/
+#if 1 /*Set it to "1" to enable content*/
 
 #ifndef LV_CONF_H
 #define LV_CONF_H
@@ -46,7 +46,7 @@
  *=========================*/
 
 /*1: use custom malloc/free, 0: use the built-in `lv_mem_alloc()` and `lv_mem_free()`*/
-#define LV_MEM_CUSTOM 0
+#define LV_MEM_CUSTOM 1
 #if LV_MEM_CUSTOM == 0
     /*Size of the memory available for `lv_mem_alloc()` in bytes (>= 2kB)*/
     #define LV_MEM_SIZE (48U * 1024U)          /*[bytes]*/
@@ -78,10 +78,10 @@
  *====================*/
 
 /*Default display refresh period. LVG will redraw changed areas with this period time*/
-#define LV_DISP_DEF_REFR_PERIOD 30      /*[ms]*/
+#define LV_DISP_DEF_REFR_PERIOD 20      /*[ms]*/
 
 /*Input device read period in milliseconds*/
-#define LV_INDEV_DEF_READ_PERIOD 30     /*[ms]*/
+#define LV_INDEV_DEF_READ_PERIOD 20     /*[ms]*/
 
 /*Use a custom tick source that tells the elapsed time in milliseconds.
  *It removes the need to manually update the tick with `lv_tick_inc()`)*/
@@ -268,7 +268,7 @@
  *-----------*/
 
 /*1: Show CPU usage and FPS count*/
-#define LV_USE_PERF_MONITOR 0
+#define LV_USE_PERF_MONITOR 1
 #if LV_USE_PERF_MONITOR
     #define LV_USE_PERF_MONITOR_POS LV_ALIGN_BOTTOM_RIGHT
 #endif

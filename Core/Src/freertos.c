@@ -61,6 +61,20 @@ void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 /* GetIdleTaskMemory prototype (linked to static allocation support) */
 void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize );
 
+/* Hook prototypes */
+void vApplicationTickHook(void);
+
+/* USER CODE BEGIN 3 */
+__weak void vApplicationTickHook( void )
+{
+   /* This function will be called by each tick interrupt if
+   configUSE_TICK_HOOK is set to 1 in FreeRTOSConfig.h. User code can be
+   added here, but the tick hook is called from an interrupt context, so
+   code must not attempt to block, and only the interrupt safe FreeRTOS API
+   functions can be used (those that end in FromISR()). */
+}
+/* USER CODE END 3 */
+
 /* USER CODE BEGIN GET_IDLE_TASK_MEMORY */
 static StaticTask_t xIdleTaskTCBBuffer;
 static StackType_t xIdleStack[configMINIMAL_STACK_SIZE];
@@ -102,7 +116,7 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the thread(s) */
   /* definition and creation of defaultTask */
-  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 256);
+  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 1024);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */

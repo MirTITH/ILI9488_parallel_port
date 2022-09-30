@@ -2,20 +2,25 @@
 #include "stm32_adafruit_lcd.h"
 #include "stdio.h"
 #include "cmsis_os.h"
+#include "lvgl.h"
+#include "lv_port_disp.h"
+
+// uint16_t screenData[10240];
 
 void StartDefaultTask(void const *argument)
 {
     (void)argument;
-    BSP_LCD_Init();
 
-    uint16_t color = {0};
-    uint32_t last_tick;
+    lv_init();
+    lv_port_disp_init();
 
+    // BSP_LCD_Init();
+
+    // BSP_LCD_DrawRGB16Image(1, 1, 50, 60, screenData);
+
+    uint32_t PreviousWakeTime = osKernelSysTick();
     for (;;) {
-        last_tick = HAL_GetTick();
-        for (int i = 0; i < 100; i++) {
-            BSP_LCD_Clear(color++);
-        }
-        printf("fps:%f\n", 100000.0 / (HAL_GetTick() - last_tick));
+        lv_task_handler();
+        osDelayUntil(&PreviousWakeTime, 5);
     }
 }

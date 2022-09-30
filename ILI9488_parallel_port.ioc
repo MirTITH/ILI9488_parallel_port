@@ -1,10 +1,11 @@
 #MicroXplorer Configuration settings - do not modify
 FREERTOS.FootprintOK=true
-FREERTOS.IPParameters=Tasks01,configENABLE_FPU,configTOTAL_HEAP_SIZE,configUSE_NEWLIB_REENTRANT,FootprintOK,copyHeapFile
-FREERTOS.Tasks01=defaultTask,0,256,StartDefaultTask,As weak,NULL,Dynamic,NULL,NULL
+FREERTOS.IPParameters=Tasks01,configENABLE_FPU,configTOTAL_HEAP_SIZE,configUSE_NEWLIB_REENTRANT,FootprintOK,copyHeapFile,configUSE_TICK_HOOK
+FREERTOS.Tasks01=defaultTask,0,1024,StartDefaultTask,As weak,NULL,Dynamic,NULL,NULL
 FREERTOS.configENABLE_FPU=1
 FREERTOS.configTOTAL_HEAP_SIZE=65536
 FREERTOS.configUSE_NEWLIB_REENTRANT=1
+FREERTOS.configUSE_TICK_HOOK=1
 FREERTOS.copyHeapFile=0
 FSMC.AccessMode1=FSMC_ACCESS_MODE_A
 FSMC.BusTurnAroundDuration1=0
