@@ -6,7 +6,8 @@
     ".eide/deps",
     "Core",
     "Drivers",
-    "UserCode"
+    "UserCode",
+    "Middlewares"
   ],
   "virtualFolder": {
     "name": "<virtual_root>",
