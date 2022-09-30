@@ -18,7 +18,7 @@
 /* Backlight control
    - BL: A..K, 0..15 (if not used -> X, 0)
    - BL_ON: 0 = active low level, 1 = active high level */
-#define LCD_BL            X, 0  /* If not used leave it that way */
+#define LCD_BL            B, 1  /* If not used leave it that way */
 #define LCD_BLON          0
 
 //=============================================================================
@@ -29,7 +29,7 @@
   - Bank4 (NE4) 0x6C000000
   - REGSELECT_BIT: if example A18 pin -> 18 */
 #define LCD_ADDR_BASE     0x60000000
-#define LCD_REGSELECT_BIT 16
+#define LCD_REGSELECT_BIT 18
 
 /* DMA settings
    - 0..2: 0 = no DMA, 1 = DMA1, 2 = DMA2 (DMA2-t is good!)
