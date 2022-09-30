@@ -1,5 +1,4 @@
 #include "main.h"
-#include "stm32_adafruit_lcd.h"
 #include "cmsis_os.h"
 #include "lvgl.h"
 #include "lv_port_disp.h"

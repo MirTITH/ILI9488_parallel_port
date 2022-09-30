@@ -11,7 +11,9 @@
 
 #include "lv_port_disp.h"
 #include <stdbool.h>
-#include "stm32_adafruit_lcd.h"
+#include "lcd.h"
+
+extern LCD_DrvTypeDef *lcd_drv;
 
 #define LV_PORT_BUFFER_SIZE 15360
 
@@ -44,10 +46,10 @@ void lv_port_disp_init(void)
     lv_disp_drv_init(&disp_drv); /*Basic initialization*/
 
     /*Set up the functions to access to your display*/
-    
+
     /*Set the resolution of the display*/
-    disp_drv.hor_res = BSP_LCD_GetXSize();
-    disp_drv.ver_res = BSP_LCD_GetYSize();
+    disp_drv.hor_res = lcd_drv->GetLcdPixelWidth();
+    disp_drv.ver_res = lcd_drv->GetLcdPixelHeight();
 
     /*Used to copy the buffer's content to the display*/
     disp_drv.flush_cb = disp_flush;
@@ -68,7 +70,7 @@ void lv_port_disp_init(void)
 /*Initialize your display and the required peripherals.*/
 static void disp_init(void)
 {
-    BSP_LCD_Init();
+    lcd_drv->Init();
 }
 
 /*Flush the content of the internal buffer the specific area on the display
@@ -76,7 +78,7 @@ static void disp_init(void)
  *'lv_disp_flush_ready()' has to be called when finished.*/
 static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_t *color_p)
 {
-    BSP_LCD_DrawRGB16Image(disp_drv->hor_res - area->x2 - 1, area->y1, area->x2 - area->x1 + 1, area->y2 - area->y1 + 1, (uint16_t *)color_p);
+    lcd_drv->DrawRGBImage(disp_drv->hor_res - area->x2 - 1, area->y1, area->x2 - area->x1 + 1, area->y2 - area->y1 + 1, (uint16_t *)color_p);
 
     /*IMPORTANT!!!
      *Inform the graphics library that you are ready with the flushing*/
