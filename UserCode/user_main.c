@@ -6,16 +6,16 @@
 void user_main()
 {
     BSP_LCD_Init();
-    uint32_t id = 0;
+
+    uint16_t color = {0};
+    uint32_t last_tick;
 
     for (;;) {
-        BSP_LCD_Clear(LCD_COLOR_BLACK);
-        HAL_Delay(100);
-        BSP_LCD_Clear(LCD_COLOR_MAGENTA);
-        HAL_Delay(100);
-        BSP_LCD_Clear(LCD_COLOR_YELLOW);
-        HAL_Delay(100);
-        BSP_LCD_Clear(LCD_COLOR_WHITE);
-        HAL_Delay(100);
+        last_tick = HAL_GetTick();
+        for (int i = 0; i < 100; i++)
+        {
+            BSP_LCD_Clear(color++);
+        }
+        printf("fps:%f\n", 100000.0 / (HAL_GetTick() - last_tick));
     }
 }
