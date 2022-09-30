@@ -1,6 +1,7 @@
 #include "main.h"
 #include "stm32_adafruit_lcd.h"
 #include "stdio.h"
+#include "cmsis_os.h"
 
 void StartDefaultTask(void const *argument)
 {
