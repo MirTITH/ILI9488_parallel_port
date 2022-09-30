@@ -13,11 +13,7 @@
 #include <stdbool.h>
 #include "stm32_adafruit_lcd.h"
 
-#define MY_DISP_HOR_RES     320
-#define MY_DISP_VER_RES     480
 #define LV_PORT_BUFFER_SIZE 15360
-
-lv_disp_drv_t disp_drv; /*Descriptor of a display driver*/
 
 static void disp_init(void);
 
@@ -43,13 +39,15 @@ void lv_port_disp_init(void)
      * Register the display in LVGL
      *----------------------------------*/
 
+    static lv_disp_drv_t disp_drv; /*Descriptor of a display driver*/
+
     lv_disp_drv_init(&disp_drv); /*Basic initialization*/
 
     /*Set up the functions to access to your display*/
-
+    
     /*Set the resolution of the display*/
-    disp_drv.hor_res = MY_DISP_HOR_RES;
-    disp_drv.ver_res = MY_DISP_VER_RES;
+    disp_drv.hor_res = BSP_LCD_GetXSize();
+    disp_drv.ver_res = BSP_LCD_GetYSize();
 
     /*Used to copy the buffer's content to the display*/
     disp_drv.flush_cb = disp_flush;
@@ -59,9 +57,9 @@ void lv_port_disp_init(void)
 
     // 屏幕旋转
     // disp_drv.sw_rotate = 1; // 使用软件旋转（速度稍慢）
-    // disp_drv.rotated = 0;   // 旋转选项
+    // disp_drv.rotated = 1;   // 旋转选项
 
-    // disp_drv.full_refresh = 0; // 是否每次都要刷新全部屏幕
+    disp_drv.full_refresh = 0; // 是否每次都要刷新全部屏幕
 
     /*Finally register the driver*/
     lv_disp_drv_register(&disp_drv);
@@ -78,7 +76,7 @@ static void disp_init(void)
  *'lv_disp_flush_ready()' has to be called when finished.*/
 static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_t *color_p)
 {
-    BSP_LCD_DrawRGB16Image(area->x1, area->y1, area->x2 - area->x1 + 1, area->y2 - area->y1 + 1, (uint16_t *)color_p);
+    BSP_LCD_DrawRGB16Image(disp_drv->hor_res - area->x2 - 1, area->y1, area->x2 - area->x1 + 1, area->y2 - area->y1 + 1, (uint16_t *)color_p);
 
     /*IMPORTANT!!!
      *Inform the graphics library that you are ready with the flushing*/

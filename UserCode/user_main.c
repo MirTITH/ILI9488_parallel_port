@@ -1,11 +1,9 @@
 #include "main.h"
 #include "stm32_adafruit_lcd.h"
-#include "stdio.h"
 #include "cmsis_os.h"
 #include "lvgl.h"
 #include "lv_port_disp.h"
-
-// uint16_t screenData[10240];
+#include "lv_demos.h"
 
 void StartDefaultTask(void const *argument)
 {
@@ -13,10 +11,8 @@ void StartDefaultTask(void const *argument)
 
     lv_init();
     lv_port_disp_init();
-
-    // BSP_LCD_Init();
-
-    // BSP_LCD_DrawRGB16Image(1, 1, 50, 60, screenData);
+    
+    lv_demo_music();
 
     uint32_t PreviousWakeTime = osKernelSysTick();
     for (;;) {
