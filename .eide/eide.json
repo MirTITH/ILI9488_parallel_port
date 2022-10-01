@@ -80,6 +80,12 @@
           "baseAddr": "0x08000000",
           "speed": "4M",
           "config": ".eide/debug.pyocd.yaml"
+        },
+        "OpenOCD": {
+          "bin": "",
+          "target": "stm32f4x",
+          "interface": "stlink",
+          "baseAddr": "0x08000000"
         }
       },
       "custom_dep": {

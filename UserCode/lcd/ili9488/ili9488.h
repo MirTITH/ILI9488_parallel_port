@@ -35,7 +35,7 @@
    - 0: multi-threaded protection disabled (default)
    - 1: multi-threaded protection enabled
 */
-#define  ILI9488_MULTITASK_MUTEX   0
+#define  ILI9488_MULTITASK_MUTEX   1
 
 /* ILI9488 Size (physical resolution in default orientation) */
 #define  ILI9488_LCD_PIXEL_WIDTH   320
