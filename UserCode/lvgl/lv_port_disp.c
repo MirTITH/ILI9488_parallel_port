@@ -110,6 +110,13 @@ static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_
     // 准备写入数据
     *(volatile uint16_t *)LCD_ADDR_BASE = (uint16_t)ILI9488_RAMWR;
 
+    // uint32_t size = (area->y2 - area->y1 + 1) * (area->x2 - area->x1 + 1);
+    // while (size--) {
+    //     *(volatile uint16_t *)LCD_ADDR_DATA = *(uint16_t *)color_p;
+    //     color_p++;
+    // }
+    // lv_disp_flush_ready(disp_drv);
+    
     // 使用 DMA 写入数据
     HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream0, (uint32_t)color_p, (uint32_t)LCD_ADDR_DATA, (area->y2 - area->y1 + 1) * (area->x2 - area->x1 + 1));
 }

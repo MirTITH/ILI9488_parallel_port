@@ -13,6 +13,7 @@
 #include "cmsis_os.h"
 #include "dma.h"
 #include "io_retargetToUart.h"
+#include "tim.h"
 
 volatile uint32_t RunTimeCounterValue = 0;
 
@@ -26,6 +27,11 @@ extern lv_disp_drv_t disp_drv;
 void DMA_XferCpltCallback(DMA_HandleTypeDef *hdma)
 {
     lv_disp_flush_ready(&disp_drv);
+}
+
+void configureTimerForRunTimeStats(void)
+{
+    HAL_TIM_Base_Start_IT(&htim6);
 }
 
 unsigned long getRunTimeCounterValue(void)
